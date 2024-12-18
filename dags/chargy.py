@@ -5,7 +5,9 @@ from datetime import datetime, timedelta
 
 import xmltodict
 from airflow.decorators import dag
+from airflow.operators.python import PythonOperator
 from airflow.providers.http.operators.http import HttpOperator
+from include.chargy.tasks import _store_values
 
 
 @dag(start_date=datetime(2024, 1, 1), schedule=timedelta(minutes=4), catchup=False)
@@ -20,7 +22,15 @@ def chargy():
         response_filter=lambda response: json.dumps(xmltodict.parse(response.text)),
     )
 
-    source_data
+    store_values = PythonOperator(
+        task_id="store_values",
+        python_callable=_store_values,
+        op_kwargs={
+            "values": '{{ task_instance.xcom_pull(task_ids="fetch_source_data") }}'
+        },
+    )
+
+    source_data >> store_values
 
 
 chargy()
