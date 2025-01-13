@@ -2,5 +2,5 @@
 apache-airflow-providers-amazon==9.1.0
 astro-sdk-python==1.8.1
 lxml==5.3.0
-minio==7.2.13
+minio==7.2.14
 xmltodict==0.14.2
