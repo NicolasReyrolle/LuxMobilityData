@@ -1,6 +1,6 @@
 # Astro Runtime includes the following pre-installed providers packages: https://www.astronomer.io/docs/astro/runtime-image-architecture#provider-packages
 apache-airflow-providers-amazon==9.9.0
 astro-sdk-python==1.8.1
-lxml==5.3.1
+lxml==6.0.0
 minio==7.2.15
 xmltodict==0.14.2
